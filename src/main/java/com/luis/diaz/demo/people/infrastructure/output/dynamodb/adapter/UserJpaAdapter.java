@@ -9,56 +9,43 @@ import com.luis.diaz.demo.people.domain.model.User;
 import com.luis.diaz.demo.people.domain.spi.IUserPersistencePort;
 import com.luis.diaz.demo.people.infrastructure.output.dynamodb.entity.UserEntity;
 import com.luis.diaz.demo.people.infrastructure.output.dynamodb.mapper.IUserEntityMapper;
+import com.luis.diaz.demo.people.infrastructure.output.dynamodb.repository.IUserRepository;
 import lombok.RequiredArgsConstructor;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 
 @RequiredArgsConstructor
 public class UserJpaAdapter implements IUserPersistencePort {
-    private final DynamoDBMapper dynamoDBMapper;
+    private final IUserRepository userRepository;
     private final IUserEntityMapper userEntityMapper;
 
     @Override
     public List<User> getAllUser() {
-        return dynamoDBMapper.scan(UserEntity.class, new DynamoDBScanExpression()).stream().map(userEntityMapper::toUser).toList();
+        return userRepository.findAll().stream().map(userEntityMapper::toUser).toList();
     }
 
     @Override
     public User getUser(String id) {
-        return userEntityMapper.toUser(dynamoDBMapper.load(UserEntity.class, id));
+        return userEntityMapper.toUser(userRepository.findById(id));
     }
 
     @Override
     public User saveUser(User user) {
         UserEntity userEntity = userEntityMapper.toUserEntity(user);
-        dynamoDBMapper.save(userEntity);
+        userRepository.save(userEntity);
         return userEntityMapper.toUser(userEntity);
     }
 
     @Override
     public User updateUser(User user) {
         UserEntity userEntity = userEntityMapper.toUserEntity(user);
-        dynamoDBMapper.save(userEntity, new DynamoDBSaveExpression().withExpectedEntry("id",
-                new ExpectedAttributeValue(new AttributeValue().withS(userEntity.getId()))));
+        userRepository.update(userEntity);
         return userEntityMapper.toUser(userEntity);
     }
 
     @Override
     public void deleteUser(String id) {
-        User user=null;
-        Map<String, AttributeValue> eav= new HashMap<String ,AttributeValue>();
-        eav.put(":id", new AttributeValue().withS(id));
-
-        DynamoDBScanExpression scanExpression=new DynamoDBScanExpression()
-                .withFilterExpression("dni = :dni")
-                .withExpressionAttributeValues(eav);
-
-        List<User> useResult=dynamoDBMapper.scan(User.class, scanExpression);
-        if(!useResult.isEmpty() && useResult.size()>0) {
-            user=useResult.get(0);
-        }
-        dynamoDBMapper.delete(user);
+        userRepository.deleteById(id);
     }
 }

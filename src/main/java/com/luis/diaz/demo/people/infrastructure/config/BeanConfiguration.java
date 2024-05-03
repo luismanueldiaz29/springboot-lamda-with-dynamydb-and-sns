@@ -6,6 +6,7 @@ import com.luis.diaz.demo.people.domain.spi.IUserPersistencePort;
 import com.luis.diaz.demo.people.domain.usercase.UserUseCase;
 import com.luis.diaz.demo.people.infrastructure.output.dynamodb.adapter.UserJpaAdapter;
 import com.luis.diaz.demo.people.infrastructure.output.dynamodb.mapper.IUserEntityMapper;
+import com.luis.diaz.demo.people.infrastructure.output.dynamodb.repository.IUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @RequiredArgsConstructor
 public class BeanConfiguration {
-    private final DynamoDBMapper userRepository;
+    private final IUserRepository userRepository;
     private final IUserEntityMapper userEntityMapper;
 
     @Bean

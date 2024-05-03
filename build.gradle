@@ -23,9 +23,11 @@ repositories {
 
 dependencies {
 	implementation (
-			implementation('org.springframework.boot:spring-boot-starter-web:2.6.7') {
+			implementation('org.springframework.boot:spring-boot-starter-web:2.6.7')
+					{
 				exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
-			},
+			}
+			,
 			'com.amazonaws.serverless:aws-serverless-java-container-springboot2:1.9.1'
 	)
 	implementation 'jakarta.servlet:jakarta.servlet-api:5.0.0'
