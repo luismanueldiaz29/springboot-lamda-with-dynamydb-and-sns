@@ -11,17 +11,17 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class DynamoDBConfig {
+public class AmazonDynamoDBConfig {
     @Value("${amazon.dynamodb.endpoint}")
     private String amazonDynamoDBEndpoint;
 
-    @Value("${amazon.aws.accesskey}")
+    @Value("${amazon.aws.dynamodb.accesskey}")
     private String amazonAWSAccessKey;
 
-    @Value("${amazon.aws.secretkey}")
+    @Value("${amazon.aws.dynamodb.secretkey}")
     private String amazonAWSSecretKey;
 
-    @Value("${amazon.aws.region}")
+    @Value("${amazon.aws.dynamodb.region}")
     private String amazonAWSRegion;
 
 

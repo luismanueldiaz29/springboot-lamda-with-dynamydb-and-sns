@@ -1,10 +1,5 @@
 package com.luis.diaz.demo.people.infrastructure.output.dynamodb.adapter;
 
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBSaveExpression;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
-import com.amazonaws.services.dynamodbv2.model.AttributeValue;
-import com.amazonaws.services.dynamodbv2.model.ExpectedAttributeValue;
 import com.luis.diaz.demo.people.domain.model.User;
 import com.luis.diaz.demo.people.domain.spi.IUserPersistencePort;
 import com.luis.diaz.demo.people.infrastructure.output.dynamodb.entity.UserEntity;
@@ -13,7 +8,6 @@ import com.luis.diaz.demo.people.infrastructure.output.dynamodb.repository.IUser
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
-
 
 @RequiredArgsConstructor
 public class UserJpaAdapter implements IUserPersistencePort {

@@ -43,7 +43,7 @@ public class UserRepository implements IUserRepository{
     @Override
     public void deleteById(String id) {
         User user=null;
-        Map<String, AttributeValue> eav= new HashMap<String ,AttributeValue>();
+        Map<String, AttributeValue> eav= new HashMap<>();
         eav.put(":id", new AttributeValue().withS(id));
 
         DynamoDBScanExpression scanExpression=new DynamoDBScanExpression()
