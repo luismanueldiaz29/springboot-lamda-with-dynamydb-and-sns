@@ -15,9 +15,9 @@ public class EmailPublishAmazonSnsAdapter implements IEmailPublishTopicPort {
     private String TOPIC_ARN;
 
     @Override
-    public Boolean publishMessageToTopic(String message) {
+    public Boolean publishMessageToTopic(String subject, String message) {
         try {
-            PublishRequest publishRequest = new PublishRequest(TOPIC_ARN, "SNS message", message);
+            PublishRequest publishRequest = new PublishRequest(TOPIC_ARN, message, subject);
             amazonSNSClient.publish(publishRequest);
             return true;
         }catch (Exception e){

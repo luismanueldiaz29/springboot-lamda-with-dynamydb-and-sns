@@ -10,8 +10,8 @@ public class EmailHandler implements IEmailHandler{
     private final IEmailServicePort emailServicePort;
 
     @Override
-    public Boolean publishMessage(String message) {
-        return emailServicePort.publishMessage(message);
+    public Boolean publishMessage(String subject, String message) {
+        return emailServicePort.publishMessage(subject, message);
     }
 
     @Override

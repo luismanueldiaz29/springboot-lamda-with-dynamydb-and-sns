@@ -3,10 +3,7 @@ package com.luis.diaz.demo.people.infrastructure.input.rest;
 import com.luis.diaz.demo.people.application.handler.EmailHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/email")
@@ -20,9 +17,12 @@ public class EmailRestController {
         return ResponseEntity.ok("Check your Email 🙏");
     }
 
-    @GetMapping("/publish/{msg}")
-    public ResponseEntity<String> publishToTopic(@PathVariable("msg") String message){
-        emailHandler.publishMessage(message);
+    @GetMapping("/publish")
+    public ResponseEntity<String> publishToTopic(
+            @RequestParam String subject,
+            @RequestParam String message
+    ){
+        emailHandler.publishMessage(subject, message);
         return ResponseEntity.ok("Message Published!");
     }
 }

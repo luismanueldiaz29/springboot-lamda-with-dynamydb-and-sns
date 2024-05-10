@@ -1,6 +1,6 @@
 package com.luis.diaz.demo.people.domain.spi;
 
 public interface IEmailPublishTopicPort {
-    Boolean publishMessageToTopic(String message);
+    Boolean publishMessageToTopic(String subject, String message);
     void addSubscription(String email);
 }

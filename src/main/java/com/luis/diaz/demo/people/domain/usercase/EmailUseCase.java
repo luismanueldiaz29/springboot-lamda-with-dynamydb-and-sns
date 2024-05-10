@@ -11,8 +11,8 @@ public class EmailUseCase implements IEmailServicePort {
     }
 
     @Override
-    public Boolean publishMessage(String message) {
-        return emailPublishTopicPort.publishMessageToTopic(message);
+    public Boolean publishMessage(String subject, String message) {
+        return emailPublishTopicPort.publishMessageToTopic(subject, message);
     }
 
     @Override
